@@ -113,15 +113,21 @@ function initialize_page()
     }
     
     $("td").click(function(){
-        var des = $("#description").val();
-        var tim = $("#time").val();
-        if((des != "") && (tim != "")){
-            $(this).text($(this).text()[0] + " " + des+ "" + tim);
-        }else{
-            var setMessage = set_Event();
-            setMessage = $(this).text()[0]+" "+ setMessage;
-            $(this).text(setMessage);
-        }
+            var des = $("#description").val();
+            var tim = $("#time").val();
+            if((des != "") && (tim != "")){
+                $(this).text($(this).text()[0] + " " + des+ " " + tim);
+                $("#description").val(""); 
+                $("#time").empty();
+            }else{
+                var setMessage = set_Event();
+                if(setMessage==null){
+                    setMessage = " ";
+                }
+                setMessage = $(this).text()[0]+" "+ setMessage;
+                $(this).text(setMessage);
+            }
+        
     });
     
 }
