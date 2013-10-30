@@ -116,7 +116,8 @@ function initialize_page()
             var des = $("#description").val();
             var tim = $("#time").val();
             if((des != "") && (tim != "")){
-                $(this).text($(this).text()[0] + " " + des+ " " + tim);
+                $(this).append(" " + des+ " " + tim);
+                $(this).append("<br>")
                 $("#description").val(""); 
                 $("#time").empty();
             }else{
@@ -124,8 +125,8 @@ function initialize_page()
                 if(setMessage==null){
                     setMessage = " ";
                 }
-                setMessage = $(this).text()[0]+" "+ setMessage;
-                $(this).text(setMessage);
+                setMessage =" "+ setMessage;
+                $(this).append(setMessage);
             }
         
     });
