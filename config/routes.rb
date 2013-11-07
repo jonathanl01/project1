@@ -1,4 +1,8 @@
 Project1::Application.routes.draw do
+  resources :appointments
+
+  get "events/index"
+  #resources:events
   get "pages/calendar"
   get "pages/home"
   get "pages/project_2"
