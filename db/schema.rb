@@ -11,6 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20131107012941) do
+
+  create_table "appointments", force: true do |t|
+    t.string   "time"
+    t.string   "description"
+    t.integer  "month"
+    t.integer  "day"
+    t.integer  "year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

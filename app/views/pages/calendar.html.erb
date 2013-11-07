@@ -43,34 +43,35 @@
     <p>Description</p>
     <input type="text" id="description"></input><br></br>
     
-    <table id="calendar" border="1" cellpadding="10" width="99%">
-      
-      <tr>
-        <th><a id = yearBack> << </a></th>
-        <th><a id=monthBack> < </a></th>
-        <th id=monthYear colspan="3"></th>
-        <th><a id=monthForward> > </a></th>
-        <th><a id=yearForward> >> </a></th>
-      </tr>
-      
-      <tr>
-        <td>Sun</td>
-        <td>Mon</td>
-        <td>Tues</td>
-        <td>Wed</td>
-        <td>Thur</td>
-        <td>Fri</td>
-        <td>Sat</td>
-      
-      </tr>
-      
-      <tr class="week"></tr>
-      <tr class="week"></tr>
-      <tr class="week"></tr>
-      <tr class="week"></tr>
-      <tr class="week"></tr>
-      <tr class="week"></tr>
-      
+    <table id="calendar" border="1" width="99%">
+      <thead>
+	      <tr>
+	        <th><a id = yearBack> << </a></th>
+	        <th><a id=monthBack> < </a></th>
+	        <th id=monthYear colspan="3"></th>
+	        <th><a id=monthForward> > </a></th>
+	        <th><a id=yearForward> >> </a></th>
+	      </tr>
+	      
+	      <tr>
+	        <th>Sun</th>
+	        <th>Mon</th>
+	        <th>Tues</th>
+	        <th>Wed</th>
+	        <th>Thur</th>
+	        <th>Fri</th>
+	        <th>Sat</th>
+	      
+	      </tr>
+      </thead>
+      <tbody id="tablebody">
+	      <tr class="week"></tr>
+	      <tr class="week"></tr>
+	      <tr class="week"></tr>
+	      <tr class="week"></tr>
+	      <tr class="week"></tr>
+	      <tr class="week"></tr>
+      </tbody>
       
     </table>
     

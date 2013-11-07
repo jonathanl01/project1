@@ -11,3 +11,14 @@
  *= require_self
  *= require_tree .
  */
+.weekday
+{
+	width: 60px;
+	height: 70px;
+}
+
+th
+{
+	width: 60px;
+	height: 30px;
+}

@@ -2,6 +2,7 @@ Project1::Application.routes.draw do
   resources :appointments
 
   get "events/index"
+  get "appoinments/" => "appoinemnts#index" 
   #resources:events
   get "pages/calendar"
   get "pages/home"

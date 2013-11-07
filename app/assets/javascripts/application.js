@@ -77,6 +77,7 @@ $(document).ready(function(){
 
 function initialize_page()
 {
+	var events;
     var monthYear = document.getElementById("monthYear");
     monthYear.innerHTML = months[currentMonth] + " "+ currentYear;
     var week;
@@ -87,13 +88,24 @@ function initialize_page()
     var monthEnd = days_in_month[currentMonth];
     var monthLength = monthEnd;
     
+    /*$.ajax({
+            	type: "POST",
+            	url: '/appointments',
+            	data: { appointment: { time: "hello", description:"hello", month: currentMonth+1, day: clickday, year: currentYear} },
+            	datatype: 'json',
+            	async: false,
+            	sucess: function(data){
+            		events = data;
+            	}
+    }); */
+    
     $(".week").html("");
     
     for(i=2; i<8; i++){
         week = document.getElementById("calendar").rows[i];
         for(j=0; j<7; j++){
             var day = week.insertCell(-1);
-            day.id = 'day'+days;
+            
             if(j == monthStart){
                 daysStart= true;
             }
@@ -102,7 +114,12 @@ function initialize_page()
             }
             
             if(daysStart){
-                day.innerHTML = days.toString();
+            	//day.id = 'day'+days;
+            	day.className = 'weekday';
+            	day.id = days;
+                day.innerHTML = days.toString()+"<br/>";
+                //day.append(days.toString()+"<br/>");
+                //day.attr('data-day =' + days);
                 if(days == (new Date().getDate())){
                     day.style.backgroundColor = "gray";
                 }
@@ -112,16 +129,33 @@ function initialize_page()
         }
     }
     
-    $("td").click(function(){
+    $.getJSON("/appointments",function(data){
+    	for(var i = 0; i < data.length; i++){
+    		if(data[i].year == currentYear && data[i].month-1 == currentMonth){
+    			$("#"+ data[i].day).append(data[i].description + " - " + data[i].time + "<br/>");
+    		}
+    	}
+    })
+    
+    
+    $(".weekday").click(function(){
             var des = $("#description").val();
             var tim = $("#time").val();
+            var clickday = $(this).attr('id');
             if((des != "") && (tim != "")){
-                $(this).append(" " + des+ " " + tim);
-                $(this).append("<br>")
+                $(this).append(" " + des+ " " + tim + "<br/>");
+                
+                $.ajax({
+            	type: "POST",
+            	url: '/appointments',
+            	data: { appointment: {time: tim, description: des, month: currentMonth+1, day: clickday, year: currentYear}},
+            	datatype: 'json'
+            });  
+                
                 $("#description").val(""); 
-                $("#time").empty();
+                //$("#time").empty();
             }else{
-                var setMessage = set_Event();
+                var setMessage = set_Event(clickday);
                 if(setMessage==null){
                     setMessage = " ";
                 }
@@ -133,13 +167,24 @@ function initialize_page()
     
 }
 
-function set_Event(){
+function set_Event(clickday){
     
     var descrip = prompt("Describe your event");
     var time = prompt("Put in the time of event");
     var message;
+    
+    
+    
     if(descrip!=null && time!=null){
-        message = descrip + "\n" + time;
+        message = descrip + " " + time;
+        
+        $.ajax({
+            	type: "POST",
+            	url: '/appointments',
+            	data: { appointment: {time: time, description: descrip, month: currentMonth+1, day: clickday, year: currentYear}},
+            	datatype: 'json'
+            });  
+        
     }
     return message;
     
